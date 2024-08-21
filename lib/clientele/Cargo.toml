@@ -20,4 +20,7 @@ std = ["tracing?/std"]
 tracing = ["dep:tracing"]
 
 [dependencies]
-tracing = { version = "0.1", optional = true, default-features = false }
+argfile = { version = "0.2", default-features = false }
+dotenvy = { version = "0.15", default-features = false }
+tracing = { version = "0.1", default-features = false, optional = true }
+wild = { version = "2", default-features = false }

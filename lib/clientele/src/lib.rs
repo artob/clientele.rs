@@ -13,8 +13,14 @@
 #[doc(hidden)]
 pub mod prelude;
 
+pub use argfile::*;
+
+pub use dotenvy::dotenv;
+
 mod feature;
 pub use feature::*;
+
+pub use wild::*;
 
 #[doc = include_str!("../../../README.md")]
 #[cfg(doctest)]
