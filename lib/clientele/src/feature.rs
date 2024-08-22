@@ -2,6 +2,8 @@
 
 /// The set of features that are enabled in this build of the crate.
 pub static FEATURES: &[&str] = &[
+    #[cfg(feature = "error-stack")]
+    "error-stack",
     #[cfg(feature = "tracing")]
     "tracing",
 ];

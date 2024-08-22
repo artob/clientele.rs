@@ -16,11 +16,13 @@ publish.workspace = true
 
 [features]
 default = ["std", "tracing"]
-std = ["tracing?/std"]
+error-stack = ["dep:error-stack"]
+std = ["error-stack?/std", "tracing?/std"]
 tracing = ["dep:tracing"]
 
 [dependencies]
 argfile = { version = "0.2", default-features = false }
 dotenvy = { version = "0.15", default-features = false }
+error-stack = { version = "0.5", default-features = false, optional = true }
 tracing = { version = "0.1", default-features = false, optional = true }
 wild = { version = "2", default-features = false }

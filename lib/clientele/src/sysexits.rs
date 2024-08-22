@@ -142,3 +142,6 @@ impl From<std::io::Error> for SysexitsError {
         }
     }
 }
+
+#[cfg(feature = "error-stack")]
+impl error_stack::Context for SysexitsError {}
