@@ -89,3 +89,56 @@ pub enum SysexitsError {
     /// Something was found in an unconfigured or misconfigured state.
     EX_CONFIG = 78,
 }
+
+impl core::fmt::Display for SysexitsError {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        write!(f, "{}", *self as u8)
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::process::Termination for SysexitsError {
+    fn report(self) -> std::process::ExitCode {
+        (self as u8).into()
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::error::Error for SysexitsError {}
+
+#[cfg(feature = "std")]
+impl From<std::boxed::Box<dyn std::error::Error>> for SysexitsError {
+    fn from(error: std::boxed::Box<dyn std::error::Error>) -> Self {
+        Self::EX_SOFTWARE
+    }
+}
+
+#[cfg(feature = "std")]
+impl From<std::io::Error> for SysexitsError {
+    fn from(error: std::io::Error) -> Self {
+        use std::io::ErrorKind::*;
+        match error.kind() {
+            AddrInUse => Self::EX_TEMPFAIL,
+            AddrNotAvailable => Self::EX_USAGE,
+            AlreadyExists => Self::EX_CANTCREAT,
+            BrokenPipe => Self::EX_IOERR,
+            ConnectionAborted => Self::EX_PROTOCOL,
+            ConnectionRefused => Self::EX_UNAVAILABLE,
+            ConnectionReset => Self::EX_PROTOCOL,
+            Interrupted => Self::EX_TEMPFAIL,
+            InvalidData => Self::EX_DATAERR,
+            InvalidInput => Self::EX_DATAERR,
+            NotConnected => Self::EX_PROTOCOL,
+            NotFound => Self::EX_NOINPUT,
+            Other => Self::EX_UNAVAILABLE,
+            OutOfMemory => Self::EX_TEMPFAIL,
+            PermissionDenied => Self::EX_NOPERM,
+            TimedOut => Self::EX_IOERR,
+            UnexpectedEof => Self::EX_IOERR,
+            Unsupported => Self::EX_SOFTWARE,
+            WouldBlock => Self::EX_IOERR,
+            WriteZero => Self::EX_IOERR,
+            _ => Self::EX_UNAVAILABLE, // catch-all
+        }
+    }
+}
