@@ -6,7 +6,7 @@ default-members = ["lib/*"]
 resolver = "2"
 
 [workspace.package]
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Arto Bendiken"]
 edition = "2021"
 rust-version = "1.70"
@@ -17,7 +17,7 @@ homepage = "https://github.com/artob/clientele.rs"
 repository = "https://github.com/artob/clientele.rs"
 license = "Unlicense"
 keywords = ["cli"]
-categories = ["command-line-interface"]
+categories = ["command-line-interface", "no-std"]
 publish = true
 
 [workspace.dependencies]
