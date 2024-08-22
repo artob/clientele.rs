@@ -20,6 +20,9 @@ pub use dotenvy::dotenv;
 mod feature;
 pub use feature::*;
 
+mod sysexits;
+pub use sysexits::*;
+
 pub use wild::*;
 
 #[doc = include_str!("../../../README.md")]
