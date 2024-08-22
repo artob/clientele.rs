@@ -5,6 +5,17 @@ extern crate std;
 
 pub type SysexitsResult<T> = core::result::Result<T, SysexitsError>;
 
+/// Standard `<sysexits.h>` preferable exit codes for programs on Unix systems.
+///
+/// Quoting the rationale given in the [`sysexits(3)`] man page on BSD systems:
+///
+/// > According to `style(9)`, it is not a good practice to call `exit(3)` with
+/// > arbitrary values to indicate a failure condition when ending a program.
+/// > Instead, the pre-defined exit codes from `sysexits` should be used, so
+/// > the caller of the process can get a rough estimation about the failure
+/// > class without looking up the source code.
+///
+/// [`sysexits(3)`]: https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/sysexits.3.html
 #[allow(non_camel_case_types)]
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[repr(u8)]
@@ -90,21 +101,174 @@ pub enum SysexitsError {
     EX_CONFIG = 78,
 }
 
+impl SysexitsError {
+    pub fn is_success(&self) -> bool {
+        *self == Self::EX_OK
+    }
+
+    pub fn is_failure(&self) -> bool {
+        !self.is_success()
+    }
+
+    pub fn as_u8(&self) -> u8 {
+        *self as u8
+    }
+
+    pub fn as_i32(&self) -> i32 {
+        *self as i32
+    }
+
+    pub fn as_str(&self) -> &'static str {
+        self.name()
+    }
+
+    #[cfg(feature = "std")]
+    pub fn as_exit_code(&self) -> std::process::ExitCode {
+        std::process::ExitCode::from(self.as_u8())
+    }
+
+    #[cfg(feature = "std")]
+    #[rustversion::nightly]
+    #[doc(hidden)]
+    fn as_exit_status(&self) -> Option<std::process::ExitStatus> {
+        match *self {
+            Self::EX_OK => Some(std::process::ExitStatus::default()),
+            _ => None,
+        }
+    }
+
+    pub fn code(&self) -> Option<i32> {
+        Some(self.as_i32())
+    }
+
+    pub fn name(&self) -> &'static str {
+        use SysexitsError::*;
+        match *self {
+            EX_OK => "EX_OK",
+            EX_USAGE => "EX_USAGE",
+            EX_DATAERR => "EX_DATAERR",
+            EX_NOINPUT => "EX_NOINPUT",
+            EX_NOUSER => "EX_NOUSER",
+            EX_NOHOST => "EX_NOHOST",
+            EX_UNAVAILABLE => "EX_UNAVAILABLE",
+            EX_SOFTWARE => "EX_SOFTWARE",
+            EX_OSERR => "EX_OSERR",
+            EX_OSFILE => "EX_OSFILE",
+            EX_CANTCREAT => "EX_CANTCREAT",
+            EX_IOERR => "EX_IOERR",
+            EX_TEMPFAIL => "EX_TEMPFAIL",
+            EX_PROTOCOL => "EX_PROTOCOL",
+            EX_NOPERM => "EX_NOPERM",
+            EX_CONFIG => "EX_CONFIG",
+        }
+    }
+
+    pub fn summary(&self) -> &'static str {
+        // See: https://github.com/openbsd/src/blob/master/include/sysexits.h
+        use SysexitsError::*;
+        match *self {
+            EX_OK => "successful termination",
+            EX_USAGE => "command line usage error",
+            EX_DATAERR => "data format error",
+            EX_NOINPUT => "cannot open input",
+            EX_NOUSER => "addressee unknown",
+            EX_NOHOST => "host name unknown",
+            EX_UNAVAILABLE => "service unavailable",
+            EX_SOFTWARE => "internal software error",
+            EX_OSERR => "system error",
+            EX_OSFILE => "critical OS file missing",
+            EX_CANTCREAT => "can't create (user) output file",
+            EX_IOERR => "input/output error",
+            EX_TEMPFAIL => "temporary failure",
+            EX_PROTOCOL => "remote error in protocol",
+            EX_NOPERM => "permission denied",
+            EX_CONFIG => "configuration error",
+        }
+    }
+}
+
 impl core::fmt::Display for SysexitsError {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        write!(f, "{}", *self as u8)
+        write!(f, "{}", self.as_str())
+    }
+}
+
+impl core::str::FromStr for SysexitsError {
+    type Err = ();
+
+    fn from_str(input: &str) -> Result<Self, Self::Err> {
+        use SysexitsError::*;
+        Ok(match input {
+            "EX_OK" => EX_OK,
+            "EX_USAGE" => EX_USAGE,
+            "EX_DATAERR" => EX_DATAERR,
+            "EX_NOINPUT" => EX_NOINPUT,
+            "EX_NOUSER" => EX_NOUSER,
+            "EX_NOHOST" => EX_NOHOST,
+            "EX_UNAVAILABLE" => EX_UNAVAILABLE,
+            "EX_SOFTWARE" => EX_SOFTWARE,
+            "EX_OSERR" => EX_OSERR,
+            "EX_OSFILE" => EX_OSFILE,
+            "EX_CANTCREAT" => EX_CANTCREAT,
+            "EX_IOERR" => EX_IOERR,
+            "EX_TEMPFAIL" => EX_TEMPFAIL,
+            "EX_PROTOCOL" => EX_PROTOCOL,
+            "EX_NOPERM" => EX_NOPERM,
+            "EX_CONFIG" => EX_CONFIG,
+            _ => match u8::from_str(input) {
+                Ok(code) => return Self::try_from(code).map_err(|_| ()),
+                Err(_) => return Err(()),
+            },
+        })
+    }
+}
+
+impl core::convert::TryFrom<u8> for SysexitsError {
+    type Error = u8;
+
+    fn try_from(code: u8) -> Result<Self, Self::Error> {
+        use SysexitsError::*;
+        Ok(match code {
+            0 => EX_OK,
+            64 => EX_USAGE,
+            65 => EX_DATAERR,
+            66 => EX_NOINPUT,
+            67 => EX_NOUSER,
+            68 => EX_NOHOST,
+            69 => EX_UNAVAILABLE,
+            70 => EX_SOFTWARE,
+            71 => EX_OSERR,
+            72 => EX_OSFILE,
+            73 => EX_CANTCREAT,
+            74 => EX_IOERR,
+            75 => EX_TEMPFAIL,
+            76 => EX_PROTOCOL,
+            77 => EX_NOPERM,
+            78 => EX_CONFIG,
+            _ => return Err(code),
+        })
+    }
+}
+
+impl core::convert::TryFrom<i32> for SysexitsError {
+    type Error = i32;
+
+    fn try_from(code: i32) -> Result<Self, Self::Error> {
+        Self::try_from(code as u8).map_err(|_| code)
     }
 }
 
 #[cfg(feature = "std")]
-impl std::process::Termination for SysexitsError {
-    fn report(self) -> std::process::ExitCode {
-        (self as u8).into()
+impl core::convert::TryFrom<std::process::ExitStatus> for SysexitsError {
+    type Error = Option<i32>;
+
+    fn try_from(status: std::process::ExitStatus) -> Result<Self, Self::Error> {
+        match status.code() {
+            Some(code) => Self::try_from(code).map_err(|_| Some(code)),
+            None => Err(None),
+        }
     }
 }
-
-#[cfg(feature = "std")]
-impl std::error::Error for SysexitsError {}
 
 #[cfg(feature = "std")]
 impl From<std::boxed::Box<dyn std::error::Error>> for SysexitsError {
@@ -143,5 +307,31 @@ impl From<std::io::Error> for SysexitsError {
     }
 }
 
+#[cfg(feature = "std")]
+impl std::process::Termination for SysexitsError {
+    fn report(self) -> std::process::ExitCode {
+        (self as u8).into()
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::error::Error for SysexitsError {}
+
 #[cfg(feature = "error-stack")]
 impl error_stack::Context for SysexitsError {}
+
+/// Exit the process with the given exit code.
+#[cfg(feature = "std")]
+pub fn exit(code: SysexitsError) -> ! {
+    std::process::exit(code as i32);
+}
+
+/// Exit the process with the given exit code and error string to be printed to
+/// standard error.
+#[cfg(feature = "std")]
+macro_rules! abort {
+    ($code:expr, $($t:tt)*) => {{
+        std::eprintln!($($t)*);
+        exit($code)
+    }};
+}
