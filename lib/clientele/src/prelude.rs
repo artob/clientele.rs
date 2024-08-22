@@ -13,8 +13,7 @@ use std as alloc;
 
 pub use alloc::{
     string::{String, ToString},
+    vec::Vec,
 };
 
-pub use core::{
-    result::Result,
-};
+pub use core::result::Result;

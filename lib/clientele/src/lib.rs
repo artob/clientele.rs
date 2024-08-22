@@ -11,9 +11,12 @@
 #![allow(unused)]
 
 #[doc(hidden)]
-pub mod prelude;
+mod prelude;
 
-pub use argfile::*;
+#[cfg(feature = "std")]
+mod args;
+#[cfg(feature = "std")]
+pub use args::*;
 
 pub use dotenvy::dotenv;
 
@@ -22,8 +25,6 @@ pub use feature::*;
 
 mod sysexits;
 pub use sysexits::*;
-
-pub use wild::*;
 
 #[doc(hidden)]
 pub mod crates {
