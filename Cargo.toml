@@ -6,14 +6,14 @@ default-members = ["lib/*"]
 resolver = "2"
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Arto Bendiken"]
 edition = "2021"
 rust-version = "1.70"
 description = "Clientele.rs"
 #documentation = "https://docs.rs/clientele/"
 readme = true
-homepage = "https://github.com/artob/clientele.rs"
+homepage = "https://clientele.rs"
 repository = "https://github.com/artob/clientele.rs"
 license = "Unlicense"
 keywords = ["cli"]
