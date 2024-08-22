@@ -15,7 +15,8 @@ categories.workspace = true
 publish.workspace = true
 
 [features]
-default = ["argfile", "clap", "dirs", "dotenv", "std", "tracing", "wild"]
+default = ["all", "std"]
+all = ["argfile", "clap", "dirs", "dotenv", "tracing", "wild"]
 argfile = ["dep:argfile"]
 clap = ["dep:clap"]
 dirs = ["dep:dirs"]
