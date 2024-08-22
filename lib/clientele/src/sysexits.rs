@@ -223,7 +223,7 @@ impl core::str::FromStr for SysexitsError {
     }
 }
 
-impl core::convert::TryFrom<u8> for SysexitsError {
+impl TryFrom<u8> for SysexitsError {
     type Error = u8;
 
     fn try_from(code: u8) -> Result<Self, Self::Error> {
@@ -250,7 +250,7 @@ impl core::convert::TryFrom<u8> for SysexitsError {
     }
 }
 
-impl core::convert::TryFrom<i32> for SysexitsError {
+impl TryFrom<i32> for SysexitsError {
     type Error = i32;
 
     fn try_from(code: i32) -> Result<Self, Self::Error> {
@@ -259,7 +259,7 @@ impl core::convert::TryFrom<i32> for SysexitsError {
 }
 
 #[cfg(feature = "std")]
-impl core::convert::TryFrom<std::process::ExitStatus> for SysexitsError {
+impl TryFrom<std::process::ExitStatus> for SysexitsError {
     type Error = Option<i32>;
 
     fn try_from(status: std::process::ExitStatus) -> Result<Self, Self::Error> {
