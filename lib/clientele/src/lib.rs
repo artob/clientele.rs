@@ -25,6 +25,17 @@ pub use sysexits::*;
 
 pub use wild::*;
 
+#[doc(hidden)]
+pub mod crates {
+    pub use argfile;
+    pub use dotenvy;
+    #[cfg(feature = "error-stack")]
+    pub use error_stack;
+    #[cfg(feature = "tracing")]
+    pub use tracing;
+    pub use wild;
+}
+
 #[doc = include_str!("../../../README.md")]
 #[cfg(doctest)]
 pub struct ReadmeDoctests;
