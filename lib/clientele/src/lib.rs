@@ -27,12 +27,19 @@ pub use wild::*;
 
 #[doc(hidden)]
 pub mod crates {
+    #[cfg(feature = "argfile")]
     pub use argfile;
+    #[cfg(feature = "clap")]
+    pub use clap;
+    #[cfg(feature = "dirs")]
+    pub use dirs;
+    #[cfg(feature = "dotenv")]
     pub use dotenvy;
     #[cfg(feature = "error-stack")]
     pub use error_stack;
     #[cfg(feature = "tracing")]
     pub use tracing;
+    #[cfg(feature = "wild")]
     pub use wild;
 }
 
