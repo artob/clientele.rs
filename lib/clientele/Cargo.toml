@@ -16,31 +16,47 @@ publish.workspace = true
 
 [features]
 default = ["all", "std"]
-all = ["argfile", "clap", "dirs", "dotenv", "tracing", "wild"]
+all = [
+    "argfile",
+    "clap",
+    "color",
+    "dirs",
+    "dotenv",
+    "parse",
+    "tracing",
+    "unicode",
+    "wild",
+]
 argfile = ["dep:argfile"]
 clap = ["dep:clap"]
+color = ["clap?/color"]
 dirs = ["dep:dirs"]
 dotenv = ["dep:dotenvy"]
 error-stack = ["dep:error-stack"]
+parse = ["parse-byteunit", "parse-datetime", "parse-duration"]
+parse-byteunit = ["dep:ubyte"]
+parse-datetime = []
+parse-duration = ["dep:duration-str"]
 std = ["clap?/std", "error-stack?/std", "tracing?/std"]
 tracing = ["dep:tracing"]
+unicode = ["clap?/unicode"]
 wild = ["dep:wild"]
 
 [dependencies]
 argfile = { version = "0.2", default-features = false, optional = true }
 clap = { version = "4.5", default-features = false, features = [
-    "color",
     "derive",
     "error-context",
     "help",
     "suggestions",
-    "unicode",
     "usage",
     "wrap_help",
 ], optional = true }
 dirs = { version = "5.0", default-features = false, optional = true }
+duration-str = { version = "0.11", default-features = false, optional = true }
 dotenvy = { version = "0.15", default-features = false, optional = true }
 error-stack = { version = "0.5", default-features = false, optional = true }
 rustversion = "1.0"
 tracing = { version = "0.1", default-features = false, optional = true }
+ubyte = { version = "0.10", default-features = false, optional = true }
 wild = { version = "2", default-features = false, optional = true }

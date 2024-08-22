@@ -36,10 +36,14 @@ pub mod crates {
     pub use dirs;
     #[cfg(feature = "dotenv")]
     pub use dotenvy;
+    #[cfg(feature = "parse-duration")]
+    pub use duration_str;
     #[cfg(feature = "error-stack")]
     pub use error_stack;
     #[cfg(feature = "tracing")]
     pub use tracing;
+    #[cfg(feature = "parse-byteunit")]
+    pub use ubyte;
     #[cfg(feature = "wild")]
     pub use wild;
 }
