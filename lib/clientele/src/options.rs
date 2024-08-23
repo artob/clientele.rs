@@ -6,6 +6,11 @@ use clap::{ArgAction, Args};
 
 #[derive(Debug, Args)]
 pub struct StandardOptions {
+    #[cfg(feature = "color")]
+    /// Set the color output mode
+    #[clap(long, default_value_t = clap::ColorChoice::Auto)]
+    pub color: clap::ColorChoice,
+
     /// Enable debugging output
     #[clap(short = 'd', long, value_parser, global = true)]
     pub debug: bool,
@@ -14,7 +19,7 @@ pub struct StandardOptions {
     #[clap(long, value_parser)]
     pub license: bool,
 
-    /// Enable verbose output
+    /// Enable verbose output (may be repeated for more verbosity)
     #[clap(short = 'v', long, action = ArgAction::Count, global = true)]
     pub verbose: u8,
 

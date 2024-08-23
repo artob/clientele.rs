@@ -5,7 +5,7 @@
 
 use clientele::{
     crates::clap::{Parser, Subcommand},
-    SysexitsError,
+    StandardOptions, SysexitsError,
 };
 
 /// Skeleton command-line interface (CLI)
@@ -13,28 +13,15 @@ use clientele::{
 #[command(name = "Skeleton")]
 #[command(arg_required_else_help = true)]
 struct Options {
-    /// Enable debugging output
-    #[clap(short = 'd', long, value_parser, global = true)]
-    debug: bool,
-
-    /// Show license information
-    #[clap(long, value_parser)]
-    license: bool,
-
-    /// Enable verbose output
-    #[clap(short = 'v', long, value_parser, global = true)]
-    verbose: bool,
-
-    /// Print version information
-    #[clap(short = 'V', long, value_parser)]
-    version: bool,
+    #[clap(flatten)]
+    flags: StandardOptions,
 
     #[command(subcommand)]
-    command: Option<Commands>,
+    command: Command,
 }
 
 #[derive(Debug, Subcommand)]
-enum Commands {
+enum Command {
     /// Show the current configuration
     Config {},
 }
@@ -49,19 +36,18 @@ pub fn main() -> Result<(), SysexitsError> {
     // Parse command-line options:
     let options = Options::parse_from(args);
 
-    if options.version {
+    if options.flags.version {
         println!("skeleton {}", env!("CARGO_PKG_VERSION"));
         return Ok(());
     }
 
-    if options.license {
+    if options.flags.license {
         println!("This is free and unencumbered software released into the public domain.");
         return Ok(());
     }
 
-    let subcommand = &options.command;
-    match subcommand.as_ref().expect("subcommand is required") {
-        Commands::Config {} => {
+    match options.command {
+        Command::Config {} => {
             println!("This is the implementation of the `config` subcommand.");
             Ok(())
         }
