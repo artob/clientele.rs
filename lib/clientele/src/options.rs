@@ -8,7 +8,7 @@ use clap::{ArgAction, Args};
 pub struct StandardOptions {
     #[cfg(feature = "color")]
     /// Set the color output mode
-    #[clap(long, default_value_t = clap::ColorChoice::Auto)]
+    #[clap(long, default_value_t = clap::ColorChoice::Auto, global = true)]
     pub color: clap::ColorChoice,
 
     /// Enable debugging output
