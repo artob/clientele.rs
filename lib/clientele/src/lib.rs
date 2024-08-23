@@ -6,7 +6,7 @@
 //! # use clientele::*;
 //! ```
 
-#![no_std]
+//#![no_std]
 #![deny(unsafe_code)]
 #![allow(unused)]
 
@@ -22,6 +22,10 @@ pub use dotenvy::dotenv;
 
 mod feature;
 pub use feature::*;
+
+#[cfg(all(feature = "std", feature = "clap"))]
+mod options;
+pub use options::*;
 
 mod sysexits;
 pub use sysexits::*;
