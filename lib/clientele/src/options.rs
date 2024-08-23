@@ -2,7 +2,7 @@
 
 extern crate std;
 
-use clap::Args;
+use clap::{ArgAction, Args};
 
 #[derive(Debug, Args)]
 pub struct StandardOptions {
@@ -15,8 +15,8 @@ pub struct StandardOptions {
     pub license: bool,
 
     /// Enable verbose output
-    #[clap(short = 'v', long, value_parser, global = true)]
-    pub verbose: bool,
+    #[clap(short = 'v', long, action = ArgAction::Count, global = true)]
+    pub verbose: u8,
 
     /// Print version information
     #[clap(short = 'V', long, value_parser)]
