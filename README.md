@@ -28,10 +28,19 @@ use clientele::*;
 
 ## 📚 Reference
 
-### Features
+### Options
 
-- [`std`](lib/clientele/Cargo.toml)
-- [`tracing`](lib/clientele/Cargo.toml)
+#### [`StandardOptions`]
+
+```
+Options:
+      --color <COLOR>  Set the color output mode [default: auto] [possible values: auto, always, never]
+  -d, --debug          Enable debugging output
+      --license        Show license information
+  -v, --verbose...     Enable verbose output (may be repeated for more verbosity)
+  -V, --version        Print version information
+  -h, --help           Print help
+```
 
 ## 👨‍💻 Development
 
@@ -45,3 +54,5 @@ git clone https://github.com/artob/clientele.rs.git
 [![Share on Reddit](https://img.shields.io/badge/share%20on-reddit-red?logo=reddit)](https://reddit.com/submit?url=https://github.com/artob/clientele.rs&title=Clientele.rs)
 [![Share on Hacker News](https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator)](https://news.ycombinator.com/submitlink?u=https://github.com/artob/clientele.rs&t=Clientele.rs)
 [![Share on Facebook](https://img.shields.io/badge/share%20on-facebook-1976D2?logo=facebook)](https://www.facebook.com/sharer/sharer.php?u=https://github.com/artob/clientele.rs)
+
+[`StandardOptions`]: https://docs.rs/clientele/latest/clientele/struct.StandardOptions.html
