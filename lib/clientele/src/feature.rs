@@ -26,6 +26,8 @@ pub static FEATURES: &[&str] = &[
     "tracing",
     #[cfg(feature = "unicode")]
     "unicode",
+    #[cfg(feature = "unstable")]
+    "unstable",
     #[cfg(feature = "wild")]
     "wild",
 ];

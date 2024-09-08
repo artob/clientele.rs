@@ -37,9 +37,10 @@ parse = ["parse-byteunit", "parse-datetime", "parse-duration"]
 parse-byteunit = ["dep:ubyte"]
 parse-datetime = []
 parse-duration = ["dep:duration-str"]
-std = ["clap?/std", "error-stack?/std", "tracing?/std"]
+std = ["clap?/std", "dogma/std", "error-stack?/std", "tracing?/std"]
 tracing = ["dep:tracing"]
 unicode = ["clap?/unicode"]
+unstable = ["dogma/unstable"]
 wild = ["dep:wild"]
 
 [dependencies]
@@ -53,6 +54,7 @@ clap = { version = "4.5", default-features = false, features = [
     "wrap_help",
 ], optional = true }
 dirs = { version = "5.0", default-features = false, optional = true }
+dogma = { version = "0.1", default-features = false }
 duration-str = { version = "0.11", default-features = false, optional = true }
 dotenvy = { version = "0.15", default-features = false, optional = true }
 error-stack = { version = "0.5", default-features = false, optional = true }

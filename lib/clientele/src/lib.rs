@@ -38,6 +38,7 @@ pub mod crates {
     pub use clap;
     #[cfg(feature = "dirs")]
     pub use dirs;
+    pub use dogma;
     #[cfg(feature = "dotenv")]
     pub use dotenvy;
     #[cfg(feature = "parse-duration")]
