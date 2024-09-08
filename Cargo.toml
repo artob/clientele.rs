@@ -16,7 +16,7 @@ readme = true
 homepage = "https://clientele.rs"
 repository = "https://github.com/artob/clientele.rs"
 license = "Unlicense"
-keywords = ["cli"]
+keywords = ["cli", "clap"]
 categories = ["command-line-interface", "no-std"]
 publish = true
 
