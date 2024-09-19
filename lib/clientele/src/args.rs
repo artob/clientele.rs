@@ -2,13 +2,13 @@
 
 extern crate std;
 
-use std::{env::ArgsOs, ffi::OsString, vec::Vec};
+use std::{ffi::OsString, vec::Vec};
 
 pub fn args_os() -> Result<Vec<OsString>, std::io::Error> {
     #[cfg(not(feature = "wild"))]
-    let args: ArgsOs = std::env::args_os();
+    let args = std::env::args_os();
     #[cfg(feature = "wild")]
-    let args: ArgsOs = wild::args_os();
+    let args = wild::args_os();
 
     #[cfg(not(feature = "argfile"))]
     return Ok(args.collect());
