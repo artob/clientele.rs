@@ -32,7 +32,7 @@ use clientele::*;
 
 #### [`StandardOptions`]
 
-```
+```text
 Options:
       --color <COLOR>  Set the color output mode [default: auto] [possible values: auto, always, never]
   -d, --debug          Enable debugging output
