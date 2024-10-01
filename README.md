@@ -4,7 +4,21 @@
 [![Compatibility](https://img.shields.io/badge/rust-1.70%2B-blue)](https://rust-lang.org)
 [![Package](https://img.shields.io/crates/v/clientele)](https://crates.io/crates/clientele)
 
-🚧 _This is presently under heavy construction._
+**Clientele** makes it easy to write superb command-line utilities in Rust that
+follow best practices on all target platforms including Linux, macOS, and
+Windows. It packages and re-exports [`clap`], [`dotenvy`], [`argfile`], and
+[`wild`] into a single easy dependency.
+
+## ✨ Features
+
+- Showcases how to structure a CLI program in Rust (see the [examples](#-examples)).
+- Loads environment variables from `.env` files (using the [`dotenvy`] crate).
+- Expands command-line wildcards (globs) on Windows (using the [`wild`] crate).
+- Expands command-line @argfiles similarly to [`javac`] or Python (using the [`argfile`] crate).
+- Defines a standard set of essential command-line options (using the [`clap`] crate).
+- Supports opting out of any feature using comprehensive feature flags.
+- Adheres to the Rust API Guidelines in its [naming conventions].
+- 100% free and unencumbered public domain software.
 
 ## 🛠️ Prerequisites
 
@@ -19,6 +33,8 @@ cargo add clientele
 ```
 
 ## 👉 Examples
+
+See [`lib/clientele/examples/skeleton/main.rs`] for a complete example.
 
 ### Importing the library
 
@@ -55,4 +71,13 @@ git clone https://github.com/artob/clientele.rs.git
 [![Share on Hacker News](https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator)](https://news.ycombinator.com/submitlink?u=https://github.com/artob/clientele.rs&t=Clientele.rs)
 [![Share on Facebook](https://img.shields.io/badge/share%20on-facebook-1976D2?logo=facebook)](https://www.facebook.com/sharer/sharer.php?u=https://github.com/artob/clientele.rs)
 
+[naming conventions]: https://rust-lang.github.io/api-guidelines/naming.html
+
 [`StandardOptions`]: https://docs.rs/clientele/latest/clientele/struct.StandardOptions.html
+[`javac`]: https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html#commandlineargfile
+[`lib/clientele/examples/skeleton/main.rs`]: lib/clientele/examples/skeleton/main.rs
+
+[`argfile`]: https://crates.io/crates/argfile
+[`clap`]: https://crates.io/crates/clap
+[`dotenvy`]: https://crates.io/crates/dotenvy
+[`wild`]: https://crates.io/crates/wild
