@@ -5,17 +5,17 @@
 [![Package](https://img.shields.io/crates/v/clientele)](https://crates.io/crates/clientele)
 
 **Clientele** makes it easy to write superb command-line utilities in Rust that
-follow best practices on all target platforms including Linux, macOS, and
-Windows. It packages and re-exports [`clap`], [`dotenvy`], [`argfile`], and
+follow consistent best practices on all target platforms including Linux, macOS,
+and Windows. It packages and re-exports [`clap`], [`dotenvy`], [`argfile`], and
 [`wild`] into a single easy dependency.
 
 ## ✨ Features
 
 - Showcases how to structure a CLI program in Rust (see the [examples](#-examples)).
 - Loads environment variables from `.env` files (using the [`dotenvy`] crate).
-- Expands command-line wildcards (globs) on Windows (using the [`wild`] crate).
-- Expands command-line @argfiles similarly to [`javac`] or Python (using the [`argfile`] crate).
-- Defines a standard set of essential command-line options (using the [`clap`] crate).
+- Expands wildcards (globs) on Windows (using the [`wild`] crate).
+- Expands @argfiles similarly to [`javac`] or Python (using the [`argfile`] crate).
+- Defines a standard set of essential CLI options (using the [`clap`] crate).
 - Supports opting out of any feature using comprehensive feature flags.
 - Adheres to the Rust API Guidelines in its [naming conventions].
 - 100% free and unencumbered public domain software.
