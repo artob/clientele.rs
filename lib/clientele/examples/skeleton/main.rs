@@ -17,7 +17,7 @@ struct Options {
     flags: StandardOptions,
 
     #[command(subcommand)]
-    command: Command,
+    command: Option<Command>,
 }
 
 #[derive(Debug, Subcommand)]
@@ -46,7 +46,7 @@ pub fn main() -> Result<(), SysexitsError> {
         return Ok(());
     }
 
-    match options.command {
+    match options.command.unwrap() {
         Command::Config {} => {
             println!("This is the implementation of the `config` subcommand.");
             Ok(())
