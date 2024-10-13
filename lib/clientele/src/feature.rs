@@ -4,6 +4,8 @@
 pub static FEATURES: &[&str] = &[
     #[cfg(feature = "argfile")]
     "argfile",
+    #[cfg(feature = "camino")]
+    "camino",
     #[cfg(feature = "clap")]
     "clap",
     #[cfg(feature = "color")]
@@ -22,6 +24,8 @@ pub static FEATURES: &[&str] = &[
     "parse-datetime",
     #[cfg(feature = "parse-duration")]
     "parse-duration",
+    #[cfg(feature = "serde")]
+    "serde",
     #[cfg(feature = "tracing")]
     "tracing",
     #[cfg(feature = "unicode")]

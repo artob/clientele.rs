@@ -34,6 +34,8 @@ pub use sysexits::*;
 pub mod crates {
     #[cfg(feature = "argfile")]
     pub use argfile;
+    #[cfg(feature = "camino")]
+    pub use camino;
     #[cfg(feature = "clap")]
     pub use clap;
     #[cfg(feature = "dirs")]
