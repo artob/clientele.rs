@@ -6,8 +6,8 @@
 
 **Clientele** makes it easy to write superb command-line utilities in Rust that
 follow consistent best practices on all target platforms including Linux, macOS,
-and Windows. It packages and re-exports [`clap`], [`dotenvy`], [`argfile`], and
-[`wild`] into a single easy dependency.
+and Windows. It packages and re-exports [`clap`], [`camino`], [`dotenvy`],
+[`argfile`], and [`wild`] into a single easy dependency.
 
 ## ✨ Features
 
@@ -16,6 +16,7 @@ and Windows. It packages and re-exports [`clap`], [`dotenvy`], [`argfile`], and
 - Expands wildcards (globs) on Windows (using the [`wild`] crate).
 - Expands @argfiles similarly to [`javac`] or Python (using the [`argfile`] crate).
 - Defines a standard set of essential CLI options (using the [`clap`] crate).
+- Provides the [`Utf8Path`] and [`Utf8PathBuf`] types (using the [`camino`] crate).
 - Supports opting out of any feature using comprehensive feature flags.
 - Adheres to the Rust API Guidelines in its [naming conventions].
 - 100% free and unencumbered public domain software.
@@ -74,10 +75,13 @@ git clone https://github.com/artob/clientele.rs.git
 [naming conventions]: https://rust-lang.github.io/api-guidelines/naming.html
 
 [`StandardOptions`]: https://docs.rs/clientele/latest/clientele/struct.StandardOptions.html
+[`Utf8Path`]: https://docs.rs/camino/latest/camino/struct.Utf8Path.html
+[`Utf8PathBuf`]: https://docs.rs/camino/latest/camino/struct.Utf8PathBuf.html
 [`javac`]: https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html#commandlineargfile
 [`lib/clientele/examples/skeleton/main.rs`]: lib/clientele/examples/skeleton/main.rs
 
 [`argfile`]: https://crates.io/crates/argfile
+[`camino`]: https://crates.io/crates/camino
 [`clap`]: https://crates.io/crates/clap
 [`dotenvy`]: https://crates.io/crates/dotenvy
 [`wild`]: https://crates.io/crates/wild

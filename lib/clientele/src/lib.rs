@@ -18,6 +18,10 @@ mod args;
 #[cfg(feature = "std")]
 pub use args::*;
 
+#[cfg(feature = "camino")]
+pub use camino::{Utf8Path, Utf8PathBuf};
+
+#[cfg(feature = "dotenv")]
 pub use dotenvy::dotenv;
 
 mod feature;
