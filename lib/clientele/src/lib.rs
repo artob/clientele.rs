@@ -32,6 +32,7 @@ pub use feature::*;
 
 #[cfg(all(feature = "std", feature = "clap"))]
 mod options;
+#[cfg(all(feature = "std", feature = "clap"))]
 pub use options::*;
 
 #[cfg(all(feature = "std", feature = "camino"))]
