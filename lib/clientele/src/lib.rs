@@ -26,8 +26,6 @@ pub use dotenvy::dotenv;
 
 #[cfg(feature = "std")]
 mod envs;
-#[cfg(feature = "std")]
-pub use envs::*;
 
 mod feature;
 pub use feature::*;
@@ -35,6 +33,9 @@ pub use feature::*;
 #[cfg(all(feature = "std", feature = "clap"))]
 mod options;
 pub use options::*;
+
+#[cfg(all(feature = "std", feature = "camino"))]
+mod paths;
 
 mod sysexits;
 pub use sysexits::*;
