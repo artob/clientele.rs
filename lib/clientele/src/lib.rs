@@ -24,6 +24,11 @@ pub use camino::{Utf8Path, Utf8PathBuf};
 #[cfg(feature = "dotenv")]
 pub use dotenvy::dotenv;
 
+#[cfg(feature = "std")]
+mod envs;
+#[cfg(feature = "std")]
+pub use envs::*;
+
 mod feature;
 pub use feature::*;
 
