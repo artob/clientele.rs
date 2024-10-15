@@ -1,5 +1,29 @@
 // This is free and unencumbered software released into the public domain.
 
+pub fn home() -> Option<String> {
+    var("HOME")
+}
+
+pub fn path() -> Option<String> {
+    var("PATH")
+}
+
+pub fn shell() -> Option<String> {
+    var("SHELL")
+}
+
+pub fn term() -> Option<String> {
+    var("TERM")
+}
+
+pub fn tmpdir() -> Option<String> {
+    var("TMPDIR")
+}
+
+pub fn user() -> Option<String> {
+    var("USER")
+}
+
 /// See: https://specifications.freedesktop.org/basedir-spec/latest/#variables
 pub fn xdg_data_home() -> Option<String> {
     var("XDG_DATA_HOME")
