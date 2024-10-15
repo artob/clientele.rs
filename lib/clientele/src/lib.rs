@@ -25,7 +25,7 @@ pub use camino::{Utf8Path, Utf8PathBuf};
 pub use dotenvy::dotenv;
 
 #[cfg(feature = "std")]
-mod envs;
+pub mod envs;
 
 mod feature;
 pub use feature::*;
@@ -36,7 +36,7 @@ mod options;
 pub use options::*;
 
 #[cfg(all(feature = "std", feature = "camino"))]
-mod paths;
+pub mod paths;
 
 mod sysexits;
 pub use sysexits::*;
